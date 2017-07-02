@@ -3,6 +3,12 @@
 Unreachable is a Swift µframework that allows for letting the compiler know when
 a code path is unreachable.
 
+## Build Status
+
+| Branch   | Status |
+| :------: | :----: |
+| `master` | [![Build Status](https://travis-ci.org/nvzqz/Unreachable.svg?branch=master)](https://travis-ci.org/nvzqz/Unreachable)
+
 ## Installation
 
 ### Compatibility
