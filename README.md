@@ -95,3 +95,43 @@ manager for Objective-C and Swift.
 ### Install Manually
 
 Simply add `Unreachable.swift` into your project.
+
+## Usage
+
+Try it out for yourself! Download the repo and open 'Unreachable.playground'.
+
+### Dynamic Loop Exit
+
+In some cases, the only way a function returns a value is from within a loop,
+but the compiler may not have enough information to know that.
+
+```swift
+func getValue() -> Int {
+    for i in 0... {
+        if i == 20 {
+            return i
+        }
+    }
+    unreachable()
+}
+```
+
+### Switch Conditions
+
+A `switch` statement may have conditions applied to its branches that make it
+exhaustive, but that may not obvious to the compiler.
+
+```swift
+func sign(of value: Double?) -> FloatingPointSign? {
+    switch value {
+    case let x? where x >= 0:
+        return .plus
+    case let x? where x < 0:
+        return .minus
+    case .some:
+        unreachable()
+    case .none:
+        return nil
+    }
+}
+```
