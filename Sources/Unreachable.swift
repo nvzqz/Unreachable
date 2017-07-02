@@ -33,3 +33,15 @@
 public func unreachable() -> Never {
     return unsafeBitCast((), to: Never.self)
 }
+
+/// Asserts that the code path is unreachable.
+///
+/// Calls `assertionFailure(_:file:line:)` in unoptimized builds and `unreachable()` otherwise.
+///
+/// - parameter file: The file name to print with the message.
+/// - parameter line: The line number to print with the message.
+@inline(__always)
+public func assertUnreachable(file: StaticString = #file, line: UInt = #line) -> Never {
+    assertionFailure("Encountered unreachable path", file: file, line: line)
+    unreachable()
+}
