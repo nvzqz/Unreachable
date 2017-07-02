@@ -121,7 +121,7 @@
 			isa = PBXGroup;
 			children = (
 				52D67C9D1F096FC1008FF44B /* Sources */,
-				52D67CA31F097007008FF44B /* Resources */,
+				52D67CA31F097007008FF44B /* Support */,
 				52D67CD61F098A1D008FF44B /* Tests */,
 				52D67C6E1F096F7A008FF44B /* Products */,
 				52D67CA61F0982EF008FF44B /* Unreachable.playground */,
@@ -152,12 +152,12 @@
 			path = Sources;
 			sourceTree = "<group>";
 		};
-		52D67CA31F097007008FF44B /* Resources */ = {
+		52D67CA31F097007008FF44B /* Support */ = {
 			isa = PBXGroup;
 			children = (
 				52D67CA41F097012008FF44B /* Info.plist */,
 			);
-			name = Resources;
+			name = Support;
 			sourceTree = "<group>";
 		};
 		52D67CD61F098A1D008FF44B /* Tests */ = {
