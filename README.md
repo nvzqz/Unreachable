@@ -3,6 +3,17 @@
 Unreachable is a Swift µframework that allows for letting the compiler know when
 a code path is unreachable.
 
+- [Build Status](#build-status)
+- [Installation](#installation)
+    - [Compatibility](#compatibility)
+    - [Swift Package Manager](#install-using-swift-package-manager)
+    - [CocoaPods](#install-using-cocoapods)
+    - [Carthage](#install-using-carthage)
+- [Usage](#usage)
+    - [Dynamic Loop Exit](#dynamic-loop-exit)
+    - [Switch Conditions](#switch-conditions)
+- [License](#license)
+
 ## Build Status
 
 | Branch   | Status |
