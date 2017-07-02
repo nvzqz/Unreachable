@@ -12,6 +12,7 @@ a code path is unreachable.
 - [Usage](#usage)
     - [Dynamic Loop Exit](#dynamic-loop-exit)
     - [Switch Conditions](#switch-conditions)
+    - [Safety](#safety)
 - [License](#license)
 
 ## Build Status
@@ -147,8 +148,18 @@ func sign(of value: Double?) -> FloatingPointSign? {
 }
 ```
 
+### Safety
+
+It is [undefined behavior][ub] for `unreachable()` to be called. To protect
+against this, it is recommended to use `assertUnreachable()` instead.
+
+With `assertUnreachable()`, debug builds will exit via a fatal error if the
+function is called. In optimized builds, it's no different than calling
+`unreachable()`.
+
 ## License
 
 All source code for Unreachable is released under the [MIT License][license].
 
+[ub]: https://en.wikipedia.org/wiki/Undefined_behavior
 [license]: https://github.com/nvzqz/Unreachable/blob/master/LICENSE.md
