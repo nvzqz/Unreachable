@@ -22,6 +22,7 @@
 		52D67C9E1F096FCB008FF44B /* Unreachable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Unreachable.swift; sourceTree = "<group>"; };
 		52D67CA41F097012008FF44B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = Unreachable.xcodeproj/Info.plist; sourceTree = "<group>"; };
 		52D67CA51F0970F0008FF44B /* LICENSE.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = LICENSE.md; sourceTree = "<group>"; };
+		52D67CA61F0982EF008FF44B /* Unreachable.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = Unreachable.playground; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,6 +63,7 @@
 				52D67C9D1F096FC1008FF44B /* Sources */,
 				52D67CA31F097007008FF44B /* Resources */,
 				52D67C6E1F096F7A008FF44B /* Products */,
+				52D67CA61F0982EF008FF44B /* Unreachable.playground */,
 				52D67CA51F0970F0008FF44B /* LICENSE.md */,
 				52784F8F1F09792E0092139C /* Package.swift */,
 			);
