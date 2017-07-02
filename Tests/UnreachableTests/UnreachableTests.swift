@@ -40,7 +40,8 @@ struct Incrementor: IteratorProtocol, Sequence {
 class UnreachableTests: XCTestCase {
 
     static let allTests = [
-        ("testLoop", testLoop)
+        ("testLoop", testLoop),
+        ("testSwitch", testSwitch)
     ]
 
     func testLoop() {
@@ -50,11 +51,30 @@ class UnreachableTests: XCTestCase {
                     return i
                 }
             }
-            // Fails to compile without this.
+            // Fails to compile without this
             unreachable()
         }
         let x: UInt = 20
         XCTAssertEqual(helper(x), x)
+    }
+
+    func testSwitch() {
+        func helper(_ x: Int8?) -> Int8? {
+            switch x {
+            case let .some(y) where y > 0:
+                return y
+            case let .some(y) where y <= 0:
+                return y
+            case .some: // Fails to compile without this
+                unreachable()
+            case .none:
+                return nil
+            }
+        }
+        XCTAssertNil(helper(nil))
+        for x in Int8.min ... Int8.max {
+            XCTAssertEqual(x, helper(x))
+        }
     }
 
 }
