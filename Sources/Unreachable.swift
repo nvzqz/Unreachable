@@ -24,3 +24,12 @@
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 //  THE SOFTWARE.
 //
+
+/// An unreachable code path.
+///
+/// This can be used for whenever the compiler can't determine that a
+/// path is unreachable, such as dynamically terminating an iterator.
+@inline(__always)
+public func unreachable() -> Never {
+    return unsafeBitCast((), to: Never.self)
+}
