@@ -135,3 +135,9 @@ func sign(of value: Double?) -> FloatingPointSign? {
     }
 }
 ```
+
+## License
+
+All source code for Unreachable is released under the [MIT License][license].
+
+[license]: https://github.com/nvzqz/Unreachable/blob/master/LICENSE.md
