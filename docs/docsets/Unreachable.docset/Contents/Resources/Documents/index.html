@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Unreachable  Reference</title>
+    <link rel="stylesheet" type="text/css" href="css/jazzy.css" />
+    <link rel="stylesheet" type="text/css" href="css/highlight.css" />
+    <meta charset="utf-8">
+    <script src="js/jquery.min.js" defer></script>
+    <script src="js/jazzy.js" defer></script>
+    
+    <script src="js/lunr.min.js" defer></script>
+    <script src="js/typeahead.jquery.js" defer></script>
+    <script src="js/jazzy.search.js" defer></script>
+  </head>
+  <body>
+
+
+    <a title="Unreachable  Reference"></a>
+
+    <header class="header">
+      <p class="header-col header-col--primary">
+        <a class="header-link" href="index.html">
+          Unreachable Docs
+        </a>
+         (100% documented)
+      </p>
+    
+      <p class="header-col--secondary">
+        <form role="search" action="search.json">
+          <input type="text" placeholder="Search documentation" data-typeahead>
+        </form>
+      </p>
+    
+        <p class="header-col header-col--secondary">
+          <a class="header-link" href="https://github.com/nvzqz/Unreachable">
+            <img class="header-icon" src="img/gh.png"/>
+            View on GitHub
+          </a>
+        </p>
+    
+    </header>
+
+    <p class="breadcrumbs">
+      <a class="breadcrumb" href="index.html">Unreachable Reference</a>
+      <img class="carat" src="img/carat.png" />
+      Unreachable  Reference
+    </p>
+
+    <div class="content-wrapper">
+      <nav class="navigation">
+        <ul class="nav-groups">
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="Functions.html">Functions</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Functions.html#/s:11Unreachable06assertA0s5NeverOs12StaticStringV4file_Su4linetF">assertUnreachable(file:line:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Functions.html#/s:11Unreachable11unreachables5NeverOyF">unreachable()</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <article class="main-content">
+
+        <section class="section">
+          <div class="section-content">
+            
+            <p><a href="https://github.com/nvzqz/Unreachable"><img src="https://github.com/nvzqz/Unreachable/raw/assets/banner.png" alt="Unreachable"></a></p>
+
+<p>Unreachable is a Swift µframework that allows for letting the compiler know when
+a code path is unreachable.</p>
+
+<ul>
+<li><a href="#build-status">Build Status</a></li>
+<li><a href="#installation">Installation</a>
+
+<ul>
+<li><a href="#compatibility">Compatibility</a></li>
+<li><a href="#install-using-swift-package-manager">Swift Package Manager</a></li>
+<li><a href="#install-using-cocoapods">CocoaPods</a></li>
+<li><a href="#install-using-carthage">Carthage</a></li>
+</ul></li>
+<li><a href="#usage">Usage</a>
+
+<ul>
+<li><a href="#dynamic-loop-exit">Dynamic Loop Exit</a></li>
+<li><a href="#switch-conditions">Switch Conditions</a></li>
+<li><a href="#safety">Safety</a></li>
+</ul></li>
+<li><a href="#license">License</a></li>
+</ul>
+<a href='#build-status' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='build-status'>Build Status</h2>
+
+<table><thead>
+<tr>
+<th style="text-align: center">Branch</th>
+<th style="text-align: center">Status</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: center"><code>master</code></td>
+<td style="text-align: center"><a href="https://travis-ci.org/nvzqz/Unreachable"><img src="https://travis-ci.org/nvzqz/Unreachable.svg?branch=master" alt="Build Status"></a></td>
+</tr>
+</tbody></table>
+<a href='#installation' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='installation'>Installation</h2>
+<a href='#compatibility' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h3 id='compatibility'>Compatibility</h3>
+
+<ul>
+<li>Platforms:
+
+<ul>
+<li>macOS 10.9+</li>
+<li>iOS 8.0+</li>
+<li>watchOS 2.0+</li>
+<li>tvOS 9.0+</li>
+<li>Linux</li>
+</ul></li>
+<li>Xcode 8.0+</li>
+<li>Swift 3.0+ &amp; 4.0</li>
+</ul>
+<a href='#install-using-swift-package-manager' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h3 id='install-using-swift-package-manager'>Install Using Swift Package Manager</h3>
+
+<p>The <a href="https://swift.org/package-manager/">Swift Package Manager</a> is a
+decentralized dependency manager for Swift.</p>
+
+<ol>
+<li><p>Add the project to your <code>Package.swift</code>.</p>
+<pre class="highlight swift"><code><span class="kd">import</span> <span class="kt">PackageDescription</span>
+
+<span class="k">let</span> <span class="nv">package</span> <span class="o">=</span> <span class="kt">Package</span><span class="p">(</span>
+    <span class="nv">name</span><span class="p">:</span> <span class="s">"MyAwesomeProject"</span><span class="p">,</span>
+    <span class="nv">dependencies</span><span class="p">:</span> <span class="p">[</span>
+        <span class="o">.</span><span class="kt">Package</span><span class="p">(</span><span class="nv">url</span><span class="p">:</span> <span class="s">"https://github.com/nvzqz/Unreachable.git"</span><span class="p">,</span>
+                 <span class="nv">majorVersion</span><span class="p">:</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="p">]</span>
+<span class="p">)</span>
+</code></pre></li>
+<li><p>Import the Unreachable module.</p>
+<pre class="highlight swift"><code><span class="kd">import</span> <span class="kt">Unreachable</span>
+</code></pre></li>
+</ol>
+<a href='#install-using-cocoapods' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h3 id='install-using-cocoapods'>Install Using CocoaPods</h3>
+
+<p><a href="https://cocoapods.org/">CocoaPods</a> is a centralized dependency manager for
+Objective-C and Swift. Go <a href="https://guides.cocoapods.org/using/index.html">here</a>
+to learn more.</p>
+
+<ol>
+<li><p>Add the project to your <a href="https://guides.cocoapods.org/using/the-podfile.html">Podfile</a>.</p>
+<pre class="highlight ruby"><code><span class="n">use_frameworks!</span>
+
+<span class="n">pod</span> <span class="s1">'Unreachable'</span><span class="p">,</span> <span class="s1">'~&gt; 1.1.0'</span>
+</code></pre>
+
+<p>If you want to be on the bleeding edge, replace the last line with:</p>
+<pre class="highlight ruby"><code><span class="n">pod</span> <span class="s1">'Unreachable'</span><span class="p">,</span> <span class="ss">:git</span> <span class="o">=&gt;</span> <span class="s1">'https://github.com/nvzqz/Unreachable.git'</span>
+</code></pre></li>
+<li><p>Run <code>pod install</code> and open the <code>.xcworkspace</code> file to launch Xcode.</p></li>
+<li><p>Import the Unreachable framework.</p>
+<pre class="highlight swift"><code><span class="kd">import</span> <span class="kt">Unreachable</span>
+</code></pre></li>
+</ol>
+<a href='#install-using-carthage' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h3 id='install-using-carthage'>Install Using Carthage</h3>
+
+<p><a href="https://github.com/Carthage/Carthage">Carthage</a> is a decentralized dependency
+manager for Objective-C and Swift.</p>
+
+<ol>
+<li><p>Add the project to your <a href="https://github.com/Carthage/Carthage/blob/master/Documentation/Artifacts.md#cartfile">Cartfile</a>.</p>
+<pre class="highlight plaintext"><code>github "nvzqz/Unreachable"
+</code></pre></li>
+<li><p>Run <code>carthage update</code> and follow <a href="https://github.com/Carthage/Carthage#getting-started">the additional steps</a>
+in order to add Unreachable to your project.</p></li>
+<li><p>Import the Unreachable framework.</p>
+<pre class="highlight swift"><code><span class="kd">import</span> <span class="kt">Unreachable</span>
+</code></pre></li>
+</ol>
+<a href='#install-manually' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h3 id='install-manually'>Install Manually</h3>
+
+<p>Simply add <code>Unreachable.swift</code> into your project.</p>
+<a href='#usage' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='usage'>Usage</h2>
+
+<p>Try it out for yourself! Download the repo and open &lsquo;Unreachable.playground&rsquo;.</p>
+<a href='#dynamic-loop-exit' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h3 id='dynamic-loop-exit'>Dynamic Loop Exit</h3>
+
+<p>In some cases, the only way a function returns a value is from within a loop,
+but the compiler may not have enough information to know that.</p>
+<pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">getValue</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">Int</span> <span class="p">{</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="k">in</span> <span class="mi">0</span><span class="o">...</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">20</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="n">i</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="nf">unreachable</span><span class="p">()</span>
+<span class="p">}</span>
+</code></pre>
+<a href='#switch-conditions' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h3 id='switch-conditions'>Switch Conditions</h3>
+
+<p>A <code>switch</code> statement may have conditions applied to its branches that make it
+exhaustive, but that may not obvious to the compiler.</p>
+<pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">sign</span><span class="p">(</span><span class="n">of</span> <span class="nv">value</span><span class="p">:</span> <span class="kt">Double</span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">FloatingPointSign</span><span class="p">?</span> <span class="p">{</span>
+    <span class="k">switch</span> <span class="n">value</span> <span class="p">{</span>
+    <span class="k">case</span> <span class="k">let</span> <span class="nv">x</span><span class="p">?</span> <span class="k">where</span> <span class="n">x</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="o">.</span><span class="n">plus</span>
+    <span class="k">case</span> <span class="k">let</span> <span class="nv">x</span><span class="p">?</span> <span class="k">where</span> <span class="n">x</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="o">.</span><span class="n">minus</span>
+    <span class="k">case</span> <span class="o">.</span><span class="nv">some</span><span class="p">:</span>
+        <span class="nf">unreachable</span><span class="p">()</span>
+    <span class="k">case</span> <span class="o">.</span><span class="nv">none</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">nil</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre>
+<a href='#safety' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h3 id='safety'>Safety</h3>
+
+<p>It is <a href="https://en.wikipedia.org/wiki/Undefined_behavior">undefined behavior</a> for <code>unreachable()</code> to be called. To protect
+against this, it is recommended to use <code>assertUnreachable()</code> instead.</p>
+
+<p>With <code>assertUnreachable()</code>, debug builds will exit via a fatal error if the
+function is called. In optimized builds, it&rsquo;s no different than calling
+<code>unreachable()</code>.</p>
+<a href='#license' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='license'>License</h2>
+
+<p>All source code for Unreachable is released under the <a href="https://github.com/nvzqz/Unreachable/blob/master/LICENSE.md">MIT License</a>.</p>
+
+<p>Assets for Unreachable are released under the <a href="https://github.com/nvzqz/Unreachable/blob/assets/LICENSE.txt">CC BY-SA 4.0 License</a>
+and can be found in the <a href="https://github.com/nvzqz/Unreachable/tree/assets"><code>assets</code> branch</a>.</p>
+
+          </div>
+        </section>
+
+
+      </article>
+    </div>
+    <section class="footer">
+      <p>&copy; 2017 <a class="link" href="https://github.com/nvzqz" target="_blank" rel="external">Nikolai Vazquez</a>. All rights reserved. (Last updated: 2017-07-03)</p>
+      <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.7.4</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+    </section>
+  </body>
+</div>
+</html>

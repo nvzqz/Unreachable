@@ -1,0 +1,8 @@
+module: Unreachable
+module_version: 1.1.0
+github_url: https://github.com/nvzqz/Unreachable
+swift_version: 4
+author: Nikolai Vazquez
+author_url: https://github.com/nvzqz
+theme: fullwidth
+clean: true
