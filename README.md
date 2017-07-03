@@ -137,7 +137,7 @@ func getValue() -> Int {
             return i
         }
     }
-    unreachable()
+    assertUnreachable()
 }
 ```
 
@@ -154,7 +154,7 @@ func sign(of value: Double?) -> FloatingPointSign? {
     case let x? where x < 0:
         return .minus
     case .some:
-        unreachable()
+        assertUnreachable()
     case .none:
         return nil
     }
