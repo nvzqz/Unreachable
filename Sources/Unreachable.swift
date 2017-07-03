@@ -38,9 +38,9 @@ public func unreachable() -> Never {
 ///
 /// Calls `assertionFailure(_:file:line:)` in unoptimized builds and `unreachable()` otherwise.
 ///
-/// - parameter message: The message to print.
-/// - parameter file: The file name to print with the message.
-/// - parameter line: The line number to print with the message.
+/// - parameter message: The message to print. The default is "Encountered unreachable path".
+/// - parameter file: The file name to print with the message. The default is the file where this function is called.
+/// - parameter line: The line number to print with the message. The default is the line where this function is called.
 @inline(__always)
 public func assertUnreachable(_ message: @autoclosure () -> String = "Encountered unreachable path",
                               file: StaticString = #file,
