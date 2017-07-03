@@ -1,5 +1,15 @@
 [![Unreachable](https://github.com/nvzqz/Unreachable/raw/assets/banner.png)](https://github.com/nvzqz/Unreachable)
 
+<p align="center">
+<img src="https://img.shields.io/badge/platform-ios%20%7C%20macos%20%7C%20watchos%20%7C%20tvos%20%7C%20linux-lightgrey.svg" alt="Platform">
+<img src="https://img.shields.io/badge/language-swift-orange.svg" alt="Language: Swift">
+<a href="https://cocoapods.org/pods/Unreachable"><img src="https://img.shields.io/cocoapods/v/Unreachable.svg" alt="CocoaPods - Unreachable"></a>
+<a href="https://github.com/Carthage/Carthage"><img src="https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat" alt="Carthage"></a>
+<img src="https://img.shields.io/cocoapods/dt/Unreachable.svg" alt="downloads">
+<a href="https://codebeat.co/projects/github-com-nvzqz-unreachable-master"><img src="https://codebeat.co/badges/3e01a261-54d1-400e-8820-6aadb177c01a" alt="codebeat badge"></a>
+<img src="https://img.shields.io/badge/license-MIT-000000.svg" alt="License">
+</p>
+
 Unreachable is a Swift µframework that allows for letting the compiler know when
 a code path is unreachable.
 
