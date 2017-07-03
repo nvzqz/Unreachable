@@ -53,7 +53,7 @@
             <a class="nav-group-name-link" href="Functions.html">Functions</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Functions.html#/s:11Unreachable06assertA0s5NeverOs12StaticStringV4file_Su4linetF">assertUnreachable(file:line:)</a>
+                <a class="nav-group-task-link" href="Functions.html#/s:11Unreachable06assertA0s5NeverOSSyXK_s12StaticStringV4fileSu4linetF">assertUnreachable(_:file:line:)</a>
               </li>
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="Functions.html#/s:11Unreachable11unreachables5NeverOyF">unreachable()</a>
@@ -109,9 +109,9 @@ path is unreachable, such as dynamically terminating an iterator.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11Unreachable06assertA0s5NeverOs12StaticStringV4file_Su4linetF"></a>
-                    <a name="//apple_ref/swift/Function/assertUnreachable(file:line:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11Unreachable06assertA0s5NeverOs12StaticStringV4file_Su4linetF">assertUnreachable(file:line:)</a>
+                    <a name="/s:11Unreachable06assertA0s5NeverOSSyXK_s12StaticStringV4fileSu4linetF"></a>
+                    <a name="//apple_ref/swift/Function/assertUnreachable(_:file:line:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11Unreachable06assertA0s5NeverOSSyXK_s12StaticStringV4fileSu4linetF">assertUnreachable(_:file:line:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -128,7 +128,9 @@ path is unreachable, such as dynamically terminating an iterator.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">assertUnreachable</span><span class="p">(</span><span class="nv">file</span><span class="p">:</span> <span class="kt">StaticString</span> <span class="o">=</span> <span class="err">#</span><span class="n">file</span><span class="p">,</span> <span class="nv">line</span><span class="p">:</span> <span class="kt">UInt</span> <span class="o">=</span> <span class="err">#</span><span class="n">line</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Never</span></code></pre>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">assertUnreachable</span><span class="p">(</span><span class="n">_</span> <span class="nv">message</span><span class="p">:</span> <span class="kd">@autoclosure</span> <span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">String</span> <span class="o">=</span> <span class="s">"Encountered unreachable path"</span><span class="p">,</span>
+                              <span class="nv">file</span><span class="p">:</span> <span class="kt">StaticString</span> <span class="o">=</span> <span class="err">#</span><span class="n">file</span><span class="p">,</span>
+                              <span class="nv">line</span><span class="p">:</span> <span class="kt">UInt</span> <span class="o">=</span> <span class="err">#</span><span class="n">line</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Never</span></code></pre>
 
                         </div>
                       </div>

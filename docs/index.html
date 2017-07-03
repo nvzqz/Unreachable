@@ -53,7 +53,7 @@
             <a class="nav-group-name-link" href="Functions.html">Functions</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Functions.html#/s:11Unreachable06assertA0s5NeverOs12StaticStringV4file_Su4linetF">assertUnreachable(file:line:)</a>
+                <a class="nav-group-task-link" href="Functions.html#/s:11Unreachable06assertA0s5NeverOSSyXK_s12StaticStringV4fileSu4linetF">assertUnreachable(_:file:line:)</a>
               </li>
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="Functions.html#/s:11Unreachable11unreachables5NeverOyF">unreachable()</a>
@@ -68,6 +68,16 @@
           <div class="section-content">
             
             <p><a href="https://github.com/nvzqz/Unreachable"><img src="https://github.com/nvzqz/Unreachable/raw/assets/banner.png" alt="Unreachable"></a></p>
+
+<p align="center">
+<img src="https://img.shields.io/badge/platform-ios%20%7C%20macos%20%7C%20watchos%20%7C%20tvos%20%7C%20linux-lightgrey.svg" alt="Platform">
+<img src="https://img.shields.io/badge/language-swift-orange.svg" alt="Language: Swift">
+<a href="https://cocoapods.org/pods/Unreachable"><img src="https://img.shields.io/cocoapods/v/Unreachable.svg" alt="CocoaPods - Unreachable"></a>
+<a href="https://github.com/Carthage/Carthage"><img src="https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat" alt="Carthage"></a>
+<img src="https://img.shields.io/cocoapods/dt/Unreachable.svg" alt="downloads">
+<a href="https://codebeat.co/projects/github-com-nvzqz-unreachable-master"><img src="https://codebeat.co/badges/3e01a261-54d1-400e-8820-6aadb177c01a" alt="codebeat badge"></a>
+<img src="https://img.shields.io/badge/license-MIT-000000.svg" alt="License">
+</p>
 
 <p>Unreachable is a Swift µframework that allows for letting the compiler know when
 a code path is unreachable.</p>
@@ -88,6 +98,12 @@ a code path is unreachable.</p>
 <li><a href="#dynamic-loop-exit">Dynamic Loop Exit</a></li>
 <li><a href="#switch-conditions">Switch Conditions</a></li>
 <li><a href="#safety">Safety</a></li>
+<li><a href="#unreachable-vs-fatalerror">Unreachable vs fatalError</a>
+
+<ul>
+<li><a href="#with-unreachable">Unreachable Example</a></li>
+<li><a href="#with-fatalerror">fatalError Example</a></li>
+</ul></li>
 </ul></li>
 <li><a href="#license">License</a></li>
 </ul>
@@ -151,7 +167,7 @@ to learn more.</p>
 <li><p>Add the project to your <a href="https://guides.cocoapods.org/using/the-podfile.html">Podfile</a>.</p>
 <pre class="highlight ruby"><code><span class="n">use_frameworks!</span>
 
-<span class="n">pod</span> <span class="s1">'Unreachable'</span><span class="p">,</span> <span class="s1">'~&gt; 1.1.0'</span>
+<span class="n">pod</span> <span class="s1">'Unreachable'</span><span class="p">,</span> <span class="s1">'~&gt; 1.2.0'</span>
 </code></pre>
 
 <p>If you want to be on the bleeding edge, replace the last line with:</p>
@@ -193,7 +209,7 @@ but the compiler may not have enough information to know that.</p>
             <span class="k">return</span> <span class="n">i</span>
         <span class="p">}</span>
     <span class="p">}</span>
-    <span class="nf">unreachable</span><span class="p">()</span>
+    <span class="nf">assertUnreachable</span><span class="p">()</span>
 <span class="p">}</span>
 </code></pre>
 <a href='#switch-conditions' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h3 id='switch-conditions'>Switch Conditions</h3>
@@ -207,7 +223,7 @@ exhaustive, but that may not obvious to the compiler.</p>
     <span class="k">case</span> <span class="k">let</span> <span class="nv">x</span><span class="p">?</span> <span class="k">where</span> <span class="n">x</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
         <span class="k">return</span> <span class="o">.</span><span class="n">minus</span>
     <span class="k">case</span> <span class="o">.</span><span class="nv">some</span><span class="p">:</span>
-        <span class="nf">unreachable</span><span class="p">()</span>
+        <span class="nf">assertUnreachable</span><span class="p">()</span>
     <span class="k">case</span> <span class="o">.</span><span class="nv">none</span><span class="p">:</span>
         <span class="k">return</span> <span class="kc">nil</span>
     <span class="p">}</span>
@@ -221,6 +237,95 @@ against this, it is recommended to use <code>assertUnreachable()</code> instead.
 <p>With <code>assertUnreachable()</code>, debug builds will exit via a fatal error if the
 function is called. In optimized builds, it&rsquo;s no different than calling
 <code>unreachable()</code>.</p>
+<a href='#unreachable-vs-code-fatalerror-code' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h3 id='unreachable-vs-code-fatalerror-code'>Unreachable vs <code>fatalError()</code></h3>
+
+<p>The <code>assertUnreachable()</code> function can be used as somewhat of a drop-in
+replacement for <code>fatalError()</code>. In debug mode, they emit similar instructions.
+However, when compiling with optimizations, <code>assertUnreachable()</code> allows its
+parent to emit very few instructions.</p>
+
+<p>Here we&rsquo;re checking whether a <code>UnicodeScalar</code> has a value in the lower or upper
+range. Because we know that these are the only valid ranges, we can let the
+compiler know that the third branch is unreachable. If at some point <code>x</code> has a
+value that&rsquo;s not within either range, it will emit an assertion failure in
+unoptimized builds.</p>
+<a href='#with-unreachable' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h4 id='with-unreachable'>With Unreachable</h4>
+<pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">isLowerRange</span><span class="p">(</span><span class="n">_</span> <span class="nv">x</span><span class="p">:</span> <span class="kt">UnicodeScalar</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Bool</span> <span class="p">{</span>
+    <span class="k">switch</span> <span class="n">x</span><span class="o">.</span><span class="n">value</span> <span class="p">{</span>
+    <span class="k">case</span> <span class="mi">0</span><span class="o">...</span><span class="mh">0xD7FF</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">true</span>
+    <span class="k">case</span> <span class="mh">0xE000</span><span class="o">...</span><span class="mh">0x10FFFF</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">false</span>
+    <span class="k">default</span><span class="p">:</span>
+        <span class="nf">assertUnreachable</span><span class="p">()</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre>
+
+<p>Assembly output:</p>
+<pre class="highlight plaintext"><code>        .globl  __T011Unreachable12isLowerRangeSbs7UnicodeO6ScalarVF
+        .p2align        4, 0x90
+__T011Unreachable12isLowerRangeSbs7UnicodeO6ScalarVF:
+        pushq   %rbp
+        movq    %rsp, %rbp
+        cmpl    $55296, %edi
+        setb    %al
+        popq    %rbp
+        retq
+</code></pre>
+<a href='#with-code-fatalerror-code' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h4 id='with-code-fatalerror-code'>With <code>fatalError()</code></h4>
+<pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">isLowerRange</span><span class="p">(</span><span class="n">_</span> <span class="nv">x</span><span class="p">:</span> <span class="kt">UnicodeScalar</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Bool</span> <span class="p">{</span>
+    <span class="k">switch</span> <span class="n">x</span><span class="o">.</span><span class="n">value</span> <span class="p">{</span>
+    <span class="k">case</span> <span class="mi">0</span><span class="o">...</span><span class="mh">0xD7FF</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">true</span>
+    <span class="k">case</span> <span class="mh">0xE000</span><span class="o">...</span><span class="mh">0x10FFFF</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">false</span>
+    <span class="k">default</span><span class="p">:</span>
+        <span class="nf">fatalError</span><span class="p">(</span><span class="s">"Unreachable"</span><span class="p">)</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre>
+
+<p>Assembly output:</p>
+<pre class="highlight plaintext"><code>        .globl  __T011Unreachable12isLowerRangeSbs7UnicodeO6ScalarVF
+        .p2align        4, 0x90
+__T011Unreachable12isLowerRangeSbs7UnicodeO6ScalarVF:
+        .cfi_startproc
+        movb    $1, %al
+        cmpl    $55296, %edi
+        jb      LBB4_3
+        addl    $-57344, %edi
+        cmpl    $1056768, %edi
+        jae     LBB4_4
+        xorl    %eax, %eax
+LBB4_3:
+        retq
+LBB4_4:
+        pushq   %rbp
+Lcfi0:
+        .cfi_def_cfa_offset 16
+Lcfi1:
+        .cfi_offset %rbp, -16
+        movq    %rsp, %rbp
+Lcfi2:
+        .cfi_def_cfa_register %rbp
+        subq    $48, %rsp
+        leaq    L___unnamed_2(%rip), %rax
+        movq    %rax, (%rsp)
+        movl    $0, 32(%rsp)
+        movq    $56, 24(%rsp)
+        movl    $2, 16(%rsp)
+        movq    $69, 8(%rsp)
+        leaq    L___unnamed_3(%rip), %rdi
+        leaq    L___unnamed_4(%rip), %rcx
+        movl    $11, %esi
+        movl    $2, %edx
+        movl    $11, %r8d
+        xorl    %r9d, %r9d
+        callq   __T0s17_assertionFailures5NeverOs12StaticStringV_SSAE4fileSu4lines6UInt32V5flagstFTfq4nxnnn_n
+        subq    $40, %rsp
+        .cfi_endproc
+</code></pre>
 <a href='#license' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='license'>License</h2>
 
 <p>All source code for Unreachable is released under the <a href="https://github.com/nvzqz/Unreachable/blob/master/LICENSE.md">MIT License</a>.</p>
