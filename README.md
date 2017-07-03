@@ -23,6 +23,9 @@ a code path is unreachable.
     - [Dynamic Loop Exit](#dynamic-loop-exit)
     - [Switch Conditions](#switch-conditions)
     - [Safety](#safety)
+    - [Unreachable vs fatalError](#unreachable-vs-fatalerror)
+        - [Unreachable Example](#with-unreachable)
+        - [fatalError Example](#with-fatalerror)
 - [License](#license)
 
 ## Build Status
