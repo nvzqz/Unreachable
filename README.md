@@ -161,5 +161,9 @@ function is called. In optimized builds, it's no different than calling
 
 All source code for Unreachable is released under the [MIT License][license].
 
+Assets for Unreachable are released under the [CC BY-SA 4.0 License][assets-license]
+and can be found in the [`assets` branch](https://github.com/nvzqz/Unreachable/tree/assets).
+
 [ub]: https://en.wikipedia.org/wiki/Undefined_behavior
 [license]: https://github.com/nvzqz/Unreachable/blob/master/LICENSE.md
+[assets-license]: https://github.com/nvzqz/Unreachable/blob/assets/LICENSE.txt
