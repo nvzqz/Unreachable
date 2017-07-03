@@ -38,10 +38,13 @@ public func unreachable() -> Never {
 ///
 /// Calls `assertionFailure(_:file:line:)` in unoptimized builds and `unreachable()` otherwise.
 ///
+/// - parameter message: The message to print.
 /// - parameter file: The file name to print with the message.
 /// - parameter line: The line number to print with the message.
 @inline(__always)
-public func assertUnreachable(file: StaticString = #file, line: UInt = #line) -> Never {
-    assertionFailure("Encountered unreachable path", file: file, line: line)
+public func assertUnreachable(_ message: @autoclosure () -> String = "Encountered unreachable path",
+                              file: StaticString = #file,
+                              line: UInt = #line) -> Never {
+    assertionFailure(message, file: file, line: line)
     unreachable()
 }
