@@ -1,4 +1,4 @@
-# Unreachable
+[![Unreachable](https://github.com/nvzqz/Unreachable/raw/assets/banner.png)](https://github.com/nvzqz/Unreachable)
 
 Unreachable is a Swift µframework that allows for letting the compiler know when
 a code path is unreachable.
