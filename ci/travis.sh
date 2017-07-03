@@ -34,5 +34,5 @@ elif [[ "$TRAVIS_OS_NAME" == "osx" ]]; then
         ONLY_ACTIVE_ARCH=NO \
         test | xcpretty
 
-    pod lib lint --quick
+    pod lib lint --private --allow-warnings --swift-version="$SWIFT_VERSION"
 fi
