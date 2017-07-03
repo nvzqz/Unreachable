@@ -167,6 +167,106 @@ With `assertUnreachable()`, debug builds will exit via a fatal error if the
 function is called. In optimized builds, it's no different than calling
 `unreachable()`.
 
+### Unreachable vs `fatalError()`
+
+The `assertUnreachable()` function can be used as somewhat of a drop-in
+replacement for `fatalError()`. In debug mode, they emit similar instructions.
+However, when compiling with optimizations, `assertUnreachable()` allows its
+parent to emit very few instructions.
+
+Here we're checking whether a `UnicodeScalar` has a value in the lower or upper
+range. Because we know that these are the only valid ranges, we can let the
+compiler know that the third branch is unreachable. If at some point `x` has a
+value that's not within either range, it will emit an assertion failure in
+unoptimized builds.
+
+#### With Unreachable
+
+```swift
+func isLowerRange(_ x: UnicodeScalar) -> Bool {
+    switch x.value {
+    case 0...0xD7FF:
+        return true
+    case 0xE000...0x10FFFF:
+        return false
+    default:
+        assertUnreachable()
+    }
+}
+```
+
+Assembly output:
+
+```assembly
+        .globl  __T011Unreachable12isLowerRangeSbs7UnicodeO6ScalarVF
+        .p2align        4, 0x90
+__T011Unreachable12isLowerRangeSbs7UnicodeO6ScalarVF:
+        pushq   %rbp
+        movq    %rsp, %rbp
+        cmpl    $55296, %edi
+        setb    %al
+        popq    %rbp
+        retq
+```
+
+#### With `fatalError()`
+
+```swift
+func isLowerRange(_ x: UnicodeScalar) -> Bool {
+    switch x.value {
+    case 0...0xD7FF:
+        return true
+    case 0xE000...0x10FFFF:
+        return false
+    default:
+        fatalError("Unreachable")
+    }
+}
+```
+
+Assembly output:
+
+```assembly
+        .globl  __T011Unreachable12isLowerRangeSbs7UnicodeO6ScalarVF
+        .p2align        4, 0x90
+__T011Unreachable12isLowerRangeSbs7UnicodeO6ScalarVF:
+        .cfi_startproc
+        movb    $1, %al
+        cmpl    $55296, %edi
+        jb      LBB4_3
+        addl    $-57344, %edi
+        cmpl    $1056768, %edi
+        jae     LBB4_4
+        xorl    %eax, %eax
+LBB4_3:
+        retq
+LBB4_4:
+        pushq   %rbp
+Lcfi0:
+        .cfi_def_cfa_offset 16
+Lcfi1:
+        .cfi_offset %rbp, -16
+        movq    %rsp, %rbp
+Lcfi2:
+        .cfi_def_cfa_register %rbp
+        subq    $48, %rsp
+        leaq    L___unnamed_2(%rip), %rax
+        movq    %rax, (%rsp)
+        movl    $0, 32(%rsp)
+        movq    $56, 24(%rsp)
+        movl    $2, 16(%rsp)
+        movq    $69, 8(%rsp)
+        leaq    L___unnamed_3(%rip), %rdi
+        leaq    L___unnamed_4(%rip), %rcx
+        movl    $11, %esi
+        movl    $2, %edx
+        movl    $11, %r8d
+        xorl    %r9d, %r9d
+        callq   __T0s17_assertionFailures5NeverOs12StaticStringV_SSAE4fileSu4lines6UInt32V5flagstFTfq4nxnnn_n
+        subq    $40, %rsp
+        .cfi_endproc
+```
+
 ## License
 
 All source code for Unreachable is released under the [MIT License][license].
