@@ -45,6 +45,12 @@ public func unreachable() -> Never {
 public func assertUnreachable(_ message: @autoclosure () -> String = "Encountered unreachable path",
                               file: StaticString = #file,
                               line: UInt = #line) -> Never {
-    assertionFailure(message, file: file, line: line)
-    unreachable()
+    var isDebug = false
+    assert({ isDebug = true; return true }())
+
+    if isDebug {
+        fatalError(message, file: file, line: line)
+    } else {
+        unreachable()
+    }
 }
